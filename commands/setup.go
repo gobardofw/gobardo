@@ -42,6 +42,7 @@ func setup(name string, w *questions.Wizard) {
 	helpers.Handle(helpers.CompileTemplate(pathResolver("internal/bootstrap/app.tpl.go"), data))
 	helpers.Handle(helpers.CompileTemplate(pathResolver("internal/bootstrap/boot.tpl.go"), data))
 	helpers.Handle(helpers.CompileTemplate(pathResolver("internal/bootstrap/cache.tpl.go"), data))
+	helpers.Handle(helpers.CompileTemplate(pathResolver("internal/bootstrap/config.tpl.go"), data))
 	helpers.Handle(helpers.CompileTemplate(pathResolver("internal/bootstrap/crypto.tpl.go"), data))
 	helpers.Handle(helpers.CompileTemplate(pathResolver("internal/bootstrap/logger.tpl.go"), data))
 	helpers.Handle(helpers.CompileTemplate(pathResolver("internal/bootstrap/translator.tpl.go"), data))
