@@ -55,7 +55,7 @@ func setup(name string, w *questions.Wizard) {
 	case "json":
 		helpers.Handle(helpers.CompileTemplate(pathResolver("config/config.tpl.json"), data))
 	}
-	helpers.Handle(helpers.CompileTemplate(pathResolver("internal/app/config.tpl.go"), data))
+	helpers.Handle(helpers.CompileTemplate(pathResolver("internal/config/config.tpl.go"), data))
 
 	if w.Result("translator") == "memory" {
 		os.RemoveAll(pathResolver("config/strings"))
