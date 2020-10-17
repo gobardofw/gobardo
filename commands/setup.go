@@ -77,8 +77,8 @@ func setup(name string, w *questions.Wizard) {
 	if w.Result("web") == "n" {
 		os.RemoveAll(pathResolver("static"))
 		os.RemoveAll(pathResolver("internal/http"))
-		os.RemoveAll(pathResolver("internal/commands/serve.go"))
 	} else {
+		helpers.Handle(helpers.CompileTemplate(pathResolver("internal/commands/serve.tpl.go"), data))
 		helpers.Handle(helpers.CompileTemplate(pathResolver("internal/bootstrap/web.tpl.go"), data))
 		helpers.Handle(helpers.CompileTemplate(pathResolver("internal/http/middlewares.tpl.go"), data))
 	}
