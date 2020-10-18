@@ -81,6 +81,6 @@ func setup(name string, w *questions.Wizard) {
 	} else {
 		helpers.Handle(helpers.CompileTemplate(pathResolver("internal/commands/serve.tpl.go"), data))
 		helpers.Handle(helpers.CompileTemplate(pathResolver("internal/bootstrap/web.tpl.go"), data))
-		helpers.Handle(helpers.CompileTemplate(pathResolver("internal/http/middlewares.tpl.go"), data))
+		helpers.Handle(helpers.CompileTemplate(pathResolver("internal/http/routes.tpl.go"), data))
 	}
 }
