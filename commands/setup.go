@@ -39,15 +39,15 @@ func setup(name string, w *questions.Wizard) {
 	helpers.Handle(helpers.CompileTemplate(pathResolver("go.mod"), data))
 	helpers.Handle(helpers.CompileTemplate(pathResolver("app.tpl.go"), data))
 	helpers.Handle(os.Rename(pathResolver("app.go"), pathResolver(fmt.Sprintf("%s.go", name))))
-	helpers.Handle(helpers.CompileTemplate(pathResolver("internal/bootstrap/app.tpl.go"), data))
-	helpers.Handle(helpers.CompileTemplate(pathResolver("internal/bootstrap/boot.tpl.go"), data))
-	helpers.Handle(helpers.CompileTemplate(pathResolver("internal/bootstrap/cache.tpl.go"), data))
-	helpers.Handle(helpers.CompileTemplate(pathResolver("internal/bootstrap/config.tpl.go"), data))
-	helpers.Handle(helpers.CompileTemplate(pathResolver("internal/bootstrap/crypto.tpl.go"), data))
-	helpers.Handle(helpers.CompileTemplate(pathResolver("internal/bootstrap/logger.tpl.go"), data))
-	helpers.Handle(helpers.CompileTemplate(pathResolver("internal/bootstrap/translator.tpl.go"), data))
-	helpers.Handle(helpers.CompileTemplate(pathResolver("internal/bootstrap/validator.tpl.go"), data))
-	helpers.Handle(helpers.CompileTemplate(pathResolver("internal/helpers/vars.tpl.go"), data))
+	helpers.Handle(helpers.CompileTemplate(pathResolver("src/bootstrap/app.tpl.go"), data))
+	helpers.Handle(helpers.CompileTemplate(pathResolver("src/bootstrap/boot.tpl.go"), data))
+	helpers.Handle(helpers.CompileTemplate(pathResolver("src/bootstrap/cache.tpl.go"), data))
+	helpers.Handle(helpers.CompileTemplate(pathResolver("src/bootstrap/config.tpl.go"), data))
+	helpers.Handle(helpers.CompileTemplate(pathResolver("src/bootstrap/crypto.tpl.go"), data))
+	helpers.Handle(helpers.CompileTemplate(pathResolver("src/bootstrap/logger.tpl.go"), data))
+	helpers.Handle(helpers.CompileTemplate(pathResolver("src/bootstrap/translator.tpl.go"), data))
+	helpers.Handle(helpers.CompileTemplate(pathResolver("src/bootstrap/validator.tpl.go"), data))
+	helpers.Handle(helpers.CompileTemplate(pathResolver("src/helpers/vars.tpl.go"), data))
 
 	// config
 	switch w.Result("config") {
@@ -56,7 +56,7 @@ func setup(name string, w *questions.Wizard) {
 	case "json":
 		helpers.Handle(helpers.CompileTemplate(pathResolver("config/config.tpl.json"), data))
 	}
-	helpers.Handle(helpers.CompileTemplate(pathResolver("internal/config/config.tpl.go"), data))
+	helpers.Handle(helpers.CompileTemplate(pathResolver("src/config/config.tpl.go"), data))
 
 	if w.Result("translator") == "memory" {
 		os.RemoveAll(pathResolver("config/strings"))
@@ -71,16 +71,16 @@ func setup(name string, w *questions.Wizard) {
 	if w.Result("database") == "n" {
 		os.RemoveAll(pathResolver("database"))
 	} else {
-		helpers.Handle(helpers.CompileTemplate(pathResolver("internal/bootstrap/database.tpl.go"), data))
+		helpers.Handle(helpers.CompileTemplate(pathResolver("src/bootstrap/database.tpl.go"), data))
 
 	}
 
 	if w.Result("web") == "n" {
-		os.RemoveAll(pathResolver("static"))
-		os.RemoveAll(pathResolver("internal/http"))
+		os.RemoveAll(pathResolver("public"))
+		os.RemoveAll(pathResolver("src/http"))
 	} else {
-		helpers.Handle(helpers.CompileTemplate(pathResolver("internal/commands/serve.tpl.go"), data))
-		helpers.Handle(helpers.CompileTemplate(pathResolver("internal/bootstrap/web.tpl.go"), data))
-		helpers.Handle(helpers.CompileTemplate(pathResolver("internal/http/routes.tpl.go"), data))
+		helpers.Handle(helpers.CompileTemplate(pathResolver("src/commands/serve.tpl.go"), data))
+		helpers.Handle(helpers.CompileTemplate(pathResolver("src/bootstrap/web.tpl.go"), data))
+		helpers.Handle(helpers.CompileTemplate(pathResolver("src/http/routes.tpl.go"), data))
 	}
 }
